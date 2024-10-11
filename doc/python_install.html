@@ -109,7 +109,7 @@ Python File (Debug the currently active Python file)
 ---
 
 
-Relative import in package:
+import in package:
 1. create __init__.py in every directory, sub directories are sub packages;
 2. set PYTHONPATH environment variable;
 3. import start from directory in PYTHONPATH value:
@@ -160,26 +160,20 @@ INFO("")
 DEBUG("")
 $
 
+# the current directory becomes the top level package root directory ;
+$ cd ~/Documents/py_pkg/src ;
+
 $ pwd
 /Users/ljh/Documents/py_pkg/src
+
+# execute module
+$ python3 -m main.main ;  # no need to use PYTHONPATH ;
+
+# or with PYTHONPATH
 $ PYTHONPATH=~/Documents/py_pkg/src python3 -m main.main ;
 
-$ cd ..
-$ pwd
-/Users/ljh/Documents/py_pkg
-$ PYTHONPATH=~/Documents/py_pkg/src python3 -m src.main.main ;
-2024-10-11 22:19:24 CST CRITICAL main.py:11:
-2024-10-11 22:19:24 CST ERROR main.py:12:
-2024-10-11 22:19:24 CST WARNING main.py:13:
-2024-10-11 22:19:24 CST INFO main.py:14:
-2024-10-11 22:19:24 CST DEBUG main.py:15:
-$
-
-
-
-
-
-
+# or execute script
+$ PYTHONPATH=~/Documents/py_pkg/src python3 main/main.py ;
 
 
 ---
