@@ -113,6 +113,7 @@ Relative import in package:
 1. create __init__.py in every directory, sub directories are sub packages;
 2. set PYTHONPATH environment variable;
 3. import start from directory in PYTHONPATH value:
+    # from: src/main/main.py, importing: src/logging2/logging2.py ;
     from logging2.logging2 import *
 4. run it with moudle:
     $ PYTHONPATH=~/Documents/py_pkg/src python3 -m src.main.main ;  # dot, without suffix
