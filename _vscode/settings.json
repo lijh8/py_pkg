@@ -20,7 +20,7 @@
     "--header-insertion=never",
   ],
   "clangd.fallbackFlags": [
-    "-std=c++23", // all should have this: .clangd, compile_commands.json, compile_flags.txt
+    "-std=c++2a", // all should have this: .clangd, compile_commands.json, compile_flags.txt
     "-DGLOG_USE_GLOG_EXPORT",
     "-I../foo",
     "-I${workspaceFolder}/src/foo",
@@ -31,8 +31,8 @@
   ],
   "clangd.semanticHighlighting": false,
   "debug.internalConsoleOptions": "neverOpen",
-  "debug.onTaskErrors": "showErrors",
   "debug.showBreakpointsInOverviewRuler": true,
+  "debug.terminal.clearBeforeReusing": true,
   "diffEditor.maxComputationTime": 0,
   "diffEditor.renderGutterMenu": false,
   "diffEditor.renderIndicators": false,
@@ -81,7 +81,7 @@
   "git.openRepositoryInParentFolders": "never",
   "go.enableCodeLens": {
     "references": false,
-    "runtest": false
+    "runtest": false,
   },
   "go.testExplorer.enable": false,
   "go.toolsEnvVars": {
@@ -92,7 +92,7 @@
   "lldb.evaluateForHovers": false,
   "outline.icons": false,
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.autopep8",
   },
   "python.analysis.inlayHints.functionReturnTypes": false,
   "python.analysis.inlayHints.pytestParameters": false,
