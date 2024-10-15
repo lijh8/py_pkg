@@ -116,6 +116,7 @@ import in package:
     # from: src/main/main.py, importing: src/logging2/logging2.py ;
     from logging2.logging2 import *
 4. run it with moudle:
+    $ python3 -m src.main.main ;  # dot, without suffix, at package root directory
     $ PYTHONPATH=~/Documents/py_pkg/src python3 -m src.main.main ;  # dot, without suffix
 5. with script file:
     $ PYTHONPATH=~/Documents/py_pkg/src python3 src/main/main.py ;  # slash, with suffix
@@ -167,7 +168,7 @@ $ pwd
 /Users/ljh/Documents/py_pkg/src
 
 # execute module
-$ python3 -m main.main ;  # no need to use PYTHONPATH ;
+$ python3 -m main.main ;  # at package root directory, no need to use PYTHONPATH ;
 
 # or with PYTHONPATH
 $ PYTHONPATH=~/Documents/py_pkg/src python3 -m main.main ;
