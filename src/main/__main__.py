@@ -1,6 +1,5 @@
 import os
 from logging2.logging2 import *
-from main import main2
 
 if __name__ == "__main__":
     logfile = "app.log"
@@ -8,4 +7,9 @@ if __name__ == "__main__":
     logging2(logfile)
 
     INFO("")
-    main2.main2()
+
+    a="abc"  # str is immutable
+    b=list(a)  # list is mutable
+    b[0]="A"
+    a="".join(b)
+    print(a)
