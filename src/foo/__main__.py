@@ -1,10 +1,19 @@
 import os
 
-# $ cd ~/Documents/py_pkg/src ;  # use the current directory as top level package root
+# change to the top level package root directory
+# $ cd ~/Documents/py_pkg/src ;
+# $ ls
+# __init__.py     foo             logging2
+# $
 # $ python3 -m foo ;  # src/foo/__main__.py
+# $ PYTHONPATH=~/Documents/py_pkg/src python3 foo/__main__.py ;
 
-from logging2.logging2 import *  # module in other directory
-from foo import foo2  # module file at same directory
+# module file in other directory
+from logging2.logging2 import *
+
+# module file in same directory
+# import foo2  # $ PYTHONPATH=~/Documents/py_pkg/src python3 foo/__main__.py ;
+from foo import foo2  # $ python3 -m foo ;
 
 if __name__ == "__main__":
     logfile = "app.log"

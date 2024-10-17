@@ -153,9 +153,15 @@ $
 $ cat foo/__main__.py
 import os
 
-$ cd ~/Documents/py_pkg/src ; # current directory as top level package root directory
-from logging2.logging2 import *  # module file from other directory
-from foo import foo2  # moudle file at same directory
+# change to the top level package root directory before run it
+# $ cd ~/Documents/py_pkg/src ;
+
+# module file in other directory
+from logging2.logging2 import *
+
+# moudle file in same directory
+# import foo2  # $ PYTHONPATH=~/Documents/py_pkg/src python3 foo/__main__.py ;
+from foo import foo2  # $ python3 -m foo ;
 
 if __name__ == "__main__":
 
@@ -173,7 +179,7 @@ if __name__ == "__main__":
 
 $
 
-# the current directory becomes the top level package root directory ;
+# change to the top level package root directory
 $ cd ~/Documents/py_pkg/src ;
 
 $ pwd
