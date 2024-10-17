@@ -113,14 +113,19 @@ import in package:
 1. create __init__.py in every directory, sub directories are sub packages;
 2. set PYTHONPATH environment variable;
 3. import start from directory in PYTHONPATH value:
-    # from: src/main/main.py, importing: src/logging2/logging2.py ;
+    # from: src/foo/__main__.py,
+    # importing: src/logging2/logging2.py, module file at other directory ;
     from logging2.logging2 import *
+    # import src/foo/foo2.py, module file at same directory;
+    from foo import foo2
 4. run it with moudle:
-    $ python3 -m src.main.main ;  # dot, without suffix, at package root directory
-    $ PYTHONPATH=~/Documents/py_pkg/src python3 -m src.main.main ;  # dot, without suffix
+    $ cd ~/Documents/py_pkg/src ; # current dir as top level package root directory
+    $ python3 -m foo ;  # dot, without suffix, at package root directory
+    $ python3 -m foo.__main__ ;  # dot, without suffix, at package root directory
+    $ PYTHONPATH=~/Documents/py_pkg/src python3 -m src.foo.__main__ ;  # dot, without suffix
 5. with script file:
-    $ PYTHONPATH=~/Documents/py_pkg/src python3 src/main/main.py ;  # slash, with suffix
-    $ PYTHONPATH=~/Documents/py_pkg/src python3 /Users/user1/Documents/py_pkg/src/main/main.py ;
+    $ PYTHONPATH=~/Documents/py_pkg/src python3 src/foo/__main__.py ;  # slash, with suffix
+    $ PYTHONPATH=~/Documents/py_pkg/src python3 /Users/user1/Documents/py_pkg/src/foo/__main__.py ;
 6. a python file is a module;
 
 
@@ -131,34 +136,41 @@ $ pwd
 /Users/ljh/Documents/py_pkg/src
 $
 $ ls
-__init__.py     logging2        main
+__init__.py     logging2        foo
 $
 $ find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
 
 .
-|______init__.py
-|____main
-| |____main.py
+|____ __init__.py
+|____foo
+| |____ __main__.py
+| |____ foo2.py
 | |____app.log
 |____logging2
 | |____logging2.py
 $
 
-$ cat main/main.py
+$ cat foo/__main__.py
 import os
-from logging2.logging2 import *
 
+$ cd ~/Documents/py_pkg/src ; # current directory as top level package root directory
+from logging2.logging2 import *  # module file from other directory
+from foo import foo2  # moudle file at same directory
 
-logfile = "app.log"
-logfile = os.path.join(os.path.dirname(os.path.abspath(__file__)), logfile)
-logging2(logfile)
+if __name__ == "__main__":
 
+    logfile = "app.log"
+    logfile = os.path.join(os.path.dirname(os.path.abspath(__file__)), logfile)
+    logging2(logfile)
 
-CRITICAL("")
-ERROR("")
-WARNING("")
-INFO("")
-DEBUG("")
+    CRITICAL("")
+    ERROR("")
+    WARNING("")
+    INFO("")
+    DEBUG("")
+
+    foo2.foo()
+
 $
 
 # the current directory becomes the top level package root directory ;
@@ -168,13 +180,15 @@ $ pwd
 /Users/ljh/Documents/py_pkg/src
 
 # execute module
-$ python3 -m main.main ;  # at package root directory, no need to use PYTHONPATH ;
+$ python3 -m foo ;  # at package root directory, no need to use PYTHONPATH ;
+$ python3 -m foo.__main__ ;
 
 # or with PYTHONPATH
-$ PYTHONPATH=~/Documents/py_pkg/src python3 -m main.main ;
+$ PYTHONPATH=~/Documents/py_pkg/src python3 -m foo ;
+$ PYTHONPATH=~/Documents/py_pkg/src python3 -m foo.__main__ ;
 
 # or execute script
-$ PYTHONPATH=~/Documents/py_pkg/src python3 main/main.py ;
+$ PYTHONPATH=~/Documents/py_pkg/src python3 foo/__main__.py ;
 
 
 ---

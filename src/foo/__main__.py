@@ -17,7 +17,7 @@ if __name__ == "__main__":
     INFO("")
     DEBUG("")
 
-    foo2.foo2()  # call function from module at same directory
+    foo2.foo()  # call function from module at same directory
 
 """
 $ cd ~/Documents/py_pkg/src
