@@ -133,6 +133,60 @@ import in package:
 
 
 $ pwd
+/home/ljh/Documents/hello_py
+$
+$ ls
+foo_dir  main  readme.txt
+$
+$ tree
+.
+├── foo_dir
+│   └── foo.py
+├── main
+│   └── main.py
+└── readme.txt
+
+3 directories, 3 files
+$
+$ cat main/main.py
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+from foo_dir import foo
+# from foo_dir.foo import *
+
+def main():
+    print("main")
+    foo.foo()
+    # foo()
+
+main()
+$
+$ cat foo_dir/foo.py
+def foo():
+    print("foo")
+$
+$ python3 main/main.py
+main
+foo
+$
+$ cd main/
+$
+$ python3 main.py
+main
+foo
+$
+
+#
+# $ PYTHONPATH=. python3 main/main.py
+#
+
+
+---
+
+
+$ pwd
 /Users/ljh/Documents/py_pkg/src
 $
 $ ls
