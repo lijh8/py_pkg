@@ -134,25 +134,25 @@ import in package:
 
 $ pwd
 /home/ljh/Documents/hello_py
-$
 $ ls
-foo_dir  main  readme.txt
+foo_dir  main_dir  readme.txt
 $
 $ tree
 .
 ├── foo_dir
 │   └── foo.py
-├── main
+├── main_dir
 │   └── main.py
 └── readme.txt
 
 3 directories, 3 files
 $
-$ cat main/main.py
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+$ cat main_dir/main.py
+# import sys
+# import os
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
+# from foo_dir import foo
 from foo_dir import foo
 # from foo_dir.foo import *
 
@@ -163,24 +163,48 @@ def main():
 
 main()
 $
+$
 $ cat foo_dir/foo.py
 def foo():
     print("foo")
 $
-$ python3 main/main.py
-main
-foo
+
+# 1. run as module with " -m " ;
+#    the current working directory is added to sys.path automatically ;
+#    without sys.path.append ;
+#    replace " / " with " . " and without suffix " .py " ;
+
+$ pwd
+/home/ljh/Documents/hello_py
 $
-$ cd main/
-$
-$ python3 main.py
+$ python3 -m main_dir.main
 main
 foo
 $
 
-#
-# $ PYTHONPATH=. python3 main/main.py
-#
+
+# 2. with PYTHONPATH ;
+#    it is updated to sys.path ;
+#    without sys.path.append ;
+
+$ pwd
+/home/ljh/Documents/hello_py
+$
+$ PYTHONPATH=. python3 main_dir/main.py
+main
+foo
+$
+
+
+# 3. with sys.path.append ;
+
+$ pwd
+/home/ljh/Documents/hello_py
+$
+$ python3 main_dir/main.py
+main
+foo
+$
 
 
 ---
