@@ -145,7 +145,6 @@ $ tree
 │   └── main.py
 └── readme.txt
 
-3 directories, 3 files
 $
 $ cat main_dir/main.py
 # import sys
@@ -169,21 +168,15 @@ def foo():
     print("foo")
 $
 
-# 1. run as module with " -m " ;
-#    the current working directory is added to sys.path automatically ;
-#    without sys.path.append ;
-#    replace " / " with " . " and without suffix " .py " ;
 
-$ pwd
-/home/ljh/Documents/hello_py
-$
-$ python3 -m main_dir.main
-main
-foo
-$
+# when run a python program file,
+# the directory containing the file is added to sys.path,
+# not necessary the current working directory is added to it.
+#
+# $ python3 file.py
+# $ python3 /path/to/file.py
 
-
-# 2. with PYTHONPATH ;
+# 1. with PYTHONPATH ;
 #    it is updated to sys.path ;
 #    without sys.path.append ;
 
@@ -196,12 +189,26 @@ foo
 $
 
 
-# 3. with sys.path.append ;
+# 2. with sys.path.append ;
 
 $ pwd
 /home/ljh/Documents/hello_py
 $
 $ python3 main_dir/main.py
+main
+foo
+$
+
+
+# 3. run as module with " -m " ;
+#    the current working directory is added to sys.path automatically ;
+#    without sys.path.append ;
+#    replace " / " with " . " and without suffix " .py " ;
+
+$ pwd
+/home/ljh/Documents/hello_py
+$
+$ python3 -m main_dir.main
 main
 foo
 $
