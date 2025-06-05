@@ -519,6 +519,43 @@ window.mainloop()
 ---
 
 
+list (3.13):
+    # indexed by numbers
+    squares = [1, 4, 9, 16, 25]
+    x = squares[0]  # index starts from subscript zero,
+                    # index returns a single element.
+    s = squares[:]  # slice retuns a sub-sequence.
+
+
+dict (5.5):
+    # indexed by keys, associative arrays, key: value pairs
+    d = {}          # empty dict
+    tel = {'jack': 4098, 'sape': 4139}
+    tel['guido'] = 4127
+
+
+set (5.4):
+    # set is like dict but has only keys without values
+    s = set()                               # empty set
+    basket = {'apple', 'orange', 'pear'}    # has only `keys`, no `:value`
+
+
+tuple (5.3):
+    t = ()                      # empty tuple
+    t = (x,)                    # one item: trailing comma required
+    t = 12345, 54321, 'hello!'  # tuple packing
+    x, y, z = t                 # unpacking
+
+
+range (4.3):
+    # starts from zero by default, like list or array index, half open
+    range(10)       # 0..9
+    range(5, 10)    # 5..9
+
+
+---
+
+
 The Python Tutorial:
 
 1:
@@ -556,6 +593,18 @@ assigning to an indexed position in the string results in an error.
 indexing is used to obtain individual characters,
 slicing allows you to obtain a substring.
     word[2:5] # 'tho'
+
+
+---
+
+
+3.1.3. Lists:
+
+Simple assignment in Python never copies data.
+
+slice returns a shallow copy of the list.
+
+(so, python is reference semantics)
 
 
 ---
