@@ -122,9 +122,12 @@ import in package:
 
 4. run it with moudle:
     $ cd ~/Documents/py_pkg/src ; # closest immediate common parent root directory to sub-dirs.
-    $ python3 -m foo ;  # dot, without suffix, at package root directory
+    $ python3 -m foo ;  # dot, without suffix, at package root directory, current dirctory is added to sys.path
     $ python3 -m foo.__main__ ;  # dot, without suffix, at package root directory
     $ PYTHONPATH=~/Documents/py_pkg/src python3 -m src.foo.__main__ ;  # dot, without suffix
+
+    # python3 -m foo; with -m option, the current directory is added to sys.path ;
+    # import statement will look for module in sys.path ;
 
 5. with script file:
     $ PYTHONPATH=~/Documents/py_pkg/src python3 src/foo/__main__.py ;  # slash, with suffix
@@ -207,6 +210,7 @@ $
 # 3. run as module with " -m " ;
 #    the current working directory is added to sys.path automatically ;
 #    without sys.path.append ;
+#    import statement will look for module in sys.path ;
 #    replace " / " with " . " and without suffix " .py " ;
 
 $ pwd
@@ -250,7 +254,10 @@ from logging2.logging2 import *
 
 # moudle file in same directory
 # import foo2  # $ PYTHONPATH=~/Documents/py_pkg/src python3 foo/__main__.py ;
-from foo import foo2  # $ python3 -m foo ;
+
+# python3 -m foo ; with -m option, the current directory is added to sys.path ;
+# import statement will look for module in sys.path ;
+from foo import foo2
 
 if __name__ == "__main__":
 
@@ -277,6 +284,8 @@ $ pwd
 # execute module
 $ python3 -m foo ;  # closest immediate common parent root directory to sub-dirs, no need to use PYTHONPATH ;
 $ python3 -m foo.__main__ ;
+# with -m option, the current directory is added to sys.path ;
+# import statement will look for module in sys.path ;
 
 # or with PYTHONPATH
 $ PYTHONPATH=~/Documents/py_pkg/src python3 -m foo ;
@@ -545,7 +554,7 @@ set (5.4):
 
 
 tuple (5.3):
-    t = ()                          # empty tuple
+    t = ()                          # empty: parentheses required
     t = (x,)                        # one item: trailing comma required
     t = (12345, 54321, 'hello!',)   # more items: parentheses and trailing comma
                                     #               are optional
@@ -556,6 +565,37 @@ range (4.3):
     # starts from zero by default, like list or array index, half open
     range(10)       # 0..9
     range(5, 10)    # 5..9
+
+
+examples:
+
+    L1 = []
+    L2 = [1,]
+    L3 = [1, 2,]
+    print(f'L1: {type(L1)}, {L1}')
+    print(f'L2: {type(L2)}, {L2}')
+    print(f'L3: {type(L3)}, {L3}')
+
+    d1 = {}
+    d2 = {1:1,}
+    d3 = {1:1, 2:2,}
+    print(f'd1: {type(d1)}, {d1}')
+    print(f'd2: {type(d2)}, {d2}')
+    print(f'd3: {type(d3)}, {d3}')
+
+    s1 = set()
+    s2 = {1,}
+    s3 = {1, 2,}
+    print(f's1: {type(s1)}, {s1}')
+    print(f's2: {type(s2)}, {s2}')
+    print(f's3: {type(s3)}, {s3}')
+
+    t1 = ()
+    t2 = (1,)
+    t3 = (1,2,)
+    print(f't1: {type(t1)}, {t1}')
+    print(f't2: {type(t2)}, {t2}')
+    print(f't3: {type(t3)}, {t3}')
 
 
 ---
