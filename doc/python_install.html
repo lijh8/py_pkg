@@ -112,20 +112,24 @@ Python File (Debug the currently active Python file)
 import in package:
 1. create __init__.py in every directory, sub directories are sub packages;
 2. set PYTHONPATH environment variable;
+
 3. import start from directory in PYTHONPATH value:
     # from: src/foo/__main__.py,
     # importing: src/logging2/logging2.py, module file at other directory ;
     from logging2.logging2 import *
     # import src/foo/foo2.py, module file at same directory;
     from foo import foo2
+
 4. run it with moudle:
-    $ cd ~/Documents/py_pkg/src ; # current dir as top level package root directory
+    $ cd ~/Documents/py_pkg/src ; # closest immediate common parent root direction to sub-dirs.
     $ python3 -m foo ;  # dot, without suffix, at package root directory
     $ python3 -m foo.__main__ ;  # dot, without suffix, at package root directory
     $ PYTHONPATH=~/Documents/py_pkg/src python3 -m src.foo.__main__ ;  # dot, without suffix
+
 5. with script file:
     $ PYTHONPATH=~/Documents/py_pkg/src python3 src/foo/__main__.py ;  # slash, with suffix
     $ PYTHONPATH=~/Documents/py_pkg/src python3 /Users/user1/Documents/py_pkg/src/foo/__main__.py ;
+
 6. a python file is a module;
 
 
@@ -271,7 +275,7 @@ $ pwd
 /Users/ljh/Documents/py_pkg/src
 
 # execute module
-$ python3 -m foo ;  # at package root directory, no need to use PYTHONPATH ;
+$ python3 -m foo ;  # closest immediate common parent root directory to sub-dirs, no need to use PYTHONPATH ;
 $ python3 -m foo.__main__ ;
 
 # or with PYTHONPATH
@@ -537,14 +541,15 @@ dict (5.5):
 set (5.4):
     # set is like dict but has only keys without values
     s = set()                               # empty set
-    basket = {'apple', 'orange', 'pear'}    # has only `keys`, no `:value`
+    basket = {'apple', 'orange', 'pear'}    # has only `keys`, no `:values`
 
 
 tuple (5.3):
-    t = ()                      # empty tuple
-    t = (x,)                    # one item: trailing comma required
-    t = 12345, 54321, 'hello!'  # tuple packing
-    x, y, z = t                 # unpacking
+    t = ()                          # empty tuple
+    t = (x,)                        # one item: trailing comma required
+    t = (12345, 54321, 'hello!',)   # more items: parentheses and trailing comma
+                                    #               are optional
+    x, y, z = t                     # unpacking
 
 
 range (4.3):
