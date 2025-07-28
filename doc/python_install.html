@@ -1771,6 +1771,102 @@ hello
 ---
 
 
+1.
+
+$ cat async.py
+
+# async tasks should be independent,
+# one does not depend on another on input or output:
+# - No shared state modification;
+# - No execution order requirements;
+# - No data passing between them during execution;
+# - Each can fail without affecting others;
+
+import asyncio
+import time
+
+async def fetch_data(id):
+    print(f"Task {id} starting")
+    await asyncio.sleep(2)  # Simulate I/O delay
+    print(f"Task {id} done")
+    return f"Result {id}"
+
+async def main():
+    start_time = time.time()  # Record start time
+
+    # Run tasks concurrently
+    results = await asyncio.gather(
+        fetch_data(1),
+        fetch_data(2),
+        fetch_data(3)
+    )
+
+    end_time = time.time()  # Record end time
+    print(f"Results: {results}")
+    print(f"Async total time: {end_time - start_time:.2f} seconds")
+
+# Run the async function
+asyncio.run(main())
+
+$
+
+$ python3 async.py
+Task 1 starting
+Task 2 starting
+Task 3 starting
+Task 1 done
+Task 2 done
+Task 3 done
+Results: ['Result 1', 'Result 2', 'Result 3']
+Async total time: 2.00 seconds
+$
+
+
+2.
+
+$ cat sync.py
+
+import time
+
+def fetch_data(id):
+    print(f"Task {id} starting")
+    time.sleep(2)  # Simulate I/O delay
+    print(f"Task {id} done")
+    return f"Result {id}"
+
+def main():
+    start_time = time.time()  # Record start time
+
+    # Run tasks one after another
+    results = [
+        fetch_data(1),
+        fetch_data(2),
+        fetch_data(3)
+    ]
+
+    end_time = time.time()  # Record end time
+    print(f"Results: {results}")
+    print(f"Sync total time: {end_time - start_time:.2f} seconds")
+
+main()
+
+$
+
+$ python3 sync.py
+Task 1 starting
+Task 1 done
+Task 2 starting
+Task 2 done
+Task 3 starting
+Task 3 done
+Results: ['Result 1', 'Result 2', 'Result 3']
+Sync total time: 6.01 seconds
+$
+
+
+---
+
+
 # check for nested json keys
 
 try:
