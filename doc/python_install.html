@@ -1771,7 +1771,62 @@ hello
 ---
 
 
-1.
+1. asyncio.TaskGroup
+
+# https://docs.python.org/3/library/asyncio-task.html#running-tasks-concurrently ,
+# Note: A new alternative to create and run tasks concurrently and wait for their
+# completion is asyncio.TaskGroup. TaskGroup provides stronger safety guarantees
+# than gather for scheduling a nesting of subtasks: if a task (or a subtask, a
+# task scheduled by a task) raises an exception, TaskGroup will, while gather
+# will not, cancel the remaining scheduled tasks).
+
+# async tasks should be independent,
+# one does not depend on another on input or output:
+# - No shared state modification;
+# - No execution order requirements;
+# - No data passing between them during execution;
+# - Each can fail without affecting others;
+
+import asyncio
+import time
+
+async def fetch_data(id):
+    print(f"Task {id} starting")
+    await asyncio.sleep(2)  # Simulate I/O delay
+    print(f"Task {id} done")
+    return f"Result {id}"
+
+async def main():
+    start_time = time.time()  # Record start time
+
+    # Run tasks concurrently
+    async with asyncio.TaskGroup() as tg:
+        task1 = tg.create_task(fetch_data(1))
+        task2 = tg.create_task(fetch_data(2))
+        task3 = tg.create_task(fetch_data(3))
+
+    results = [task1.result(), task2.result(), task3.result()]
+
+    end_time = time.time()  # Record end time
+    print(f"Results: {results}")
+    print(f"Async total time: {end_time - start_time:.2f} seconds")
+
+# Run the async function
+asyncio.run(main())
+
+
+# $ python3 main/c.py
+# Task 1 starting
+# Task 2 starting
+# Task 3 starting
+# Task 1 done
+# Task 2 done
+# Task 3 done
+# Results: ['Result 1', 'Result 2', 'Result 3']
+# Async total time: 2.00 seconds
+# $
+
+2. asyncio.gather
 
 $ cat async.py
 
@@ -1821,8 +1876,7 @@ Results: ['Result 1', 'Result 2', 'Result 3']
 Async total time: 2.00 seconds
 $
 
-
-2.
+3. sync
 
 $ cat sync.py
 
