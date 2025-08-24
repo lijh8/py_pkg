@@ -886,6 +886,59 @@ with open('file.txt', 'a') as file:
 ---
 
 
+9.
+
+class members (including the data members) are public,
+and all member functions are virtual.
+
+the method function is declared with an explicit first argument representing the
+object, which is provided implicitly by the call.
+
+
+---
+
+
+9.1
+
+immutable basic types (numbers, strings, tuples).
+mutable objects such as lists, dictionaries.
+
+since aliases behave like pointers in some respects.
+
+passing an object is cheap since only a pointer is passed by the implementation;
+and if a function modifies an object passed as an argument,
+the caller will see the change — this eliminates the need for two different
+argument passing mechanisms as in Pascal.
+
+// class is mutable.
+// immutable is like value type in c++,
+// mutable is like reference type in c++, eg. int&, double&, T&.
+
+class T:
+    def __init__(self, num):
+        self.num = num
+
+a = T(10)
+b = a
+b.num = 20
+print(a.num)  # 20
+
+"""
+$ pwd
+/Users/ljh/Documents/tmp
+$ ls
+src
+$ ls src
+foo.py
+$ python3 -m src.foo
+20
+$
+"""
+
+
+---
+
+
 9.2
 
 Assignments do not copy data — they just bind names to objects.
