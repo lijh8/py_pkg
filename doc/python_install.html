@@ -903,7 +903,17 @@ object, which is provided implicitly by the call.
 immutable basic types (numbers, strings, tuples).
 mutable objects such as lists, dictionaries.
 
-since aliases behave like pointers in some respects.
+Creating a new class creates a new type of object,
+Objects have individuality, and multiple names (in multiple scopes) can be bound
+to the same object. This is known as aliasing in other languages.
+
+since aliases behave like pointers in some respects,
+
+// in c++, a reference is an alias too,
+// it refers to another variable instead of copy. and like a pointer.
+//   int x = 10;
+//   int &r = x;
+//   int *p = &x;
 
 passing an object is cheap since only a pointer is passed by the implementation;
 and if a function modifies an object passed as an argument,
@@ -2020,6 +2030,37 @@ $ cat data.json
 }
 $
 '''
+
+
+---
+
+
+# partition by filtering instead of swapping.
+# but use the builtin sort which is timsort and faster.
+def quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+
+    return quicksort(left) + middle + quicksort(right)
+
+# Example usage
+if __name__ == "__main__":
+    # Test the algorithm
+    arr = [64, 34, 25, 12, 22, 11, 90, 88, 76, 50]
+    print("Original array:", arr)
+
+    sorted_arr = quicksort(arr)
+    print("Sorted array:  ", sorted_arr)
+
+    # Test with different data types
+    arr2 = ['banana', 'apple', 'cherry', 'date']
+    print("\nOriginal array:", arr2)
+    print("Sorted array:  ", quicksort(arr2))
 
 
 ---
