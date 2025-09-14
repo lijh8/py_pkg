@@ -2066,6 +2066,66 @@ if __name__ == "__main__":
 ---
 
 
+```
+# example_1.py
+class A:
+    def __init__(self, field_a="A"):
+        self.field_a = field_a
+        super().__init__()  # call ultimate base class object's init
+
+    def foo(self):
+        print(self.field_a)
+
+class B(A):
+    def __init__(self, field_b="B"):
+        self.field_b = field_b
+        super().__init__()  # call parent's init
+
+    def foo(self):
+        print(self.field_a, self.field_b)  # use parent's field_a
+
+obj = B()
+obj.foo()
+print(B.__mro__)
+```
+
+```
+# example_2.py
+class A:
+    def foo(self):
+        print("A")
+
+class B(A):
+    def foo(self):
+        print("B")
+
+class C(A):
+    def foo(self):
+        print("C")
+
+class D(B, C):
+    def foo(self):
+        print("D")
+
+obj = D()
+obj.foo()
+print(D.__mro__)
+```
+
+- Use super() when you want to extend parent class functionality (add to it)
+
+- Don't use super() when you want to completely replace parent class functionality
+
+- For __init__, you typically need super() if you want parent class attributes initialized
+
+- For other methods, use super() only if you want to incorporate the parent's implementation
+
+
+---
+
+
+
+
 
 
 
