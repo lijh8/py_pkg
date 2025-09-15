@@ -1364,6 +1364,7 @@ class TestHello(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 $
+
 $ python3 -m unittest -v test_hello.py
 test_add_one (test_hello.TestHello) ... ok
 test_minus_one (test_hello.TestHello) ... ok
@@ -1373,6 +1374,55 @@ Ran 2 tests in 0.000s
 
 OK
 $
+
+
+# specify directory of the test_*.py files
+
+$ python3 -m unittest discover -v -s src/main -p "test_*.py"
+test_add_one (test_hello.TestHello.test_add_one) ... ok
+test_minus_one (test_hello.TestHello.test_minus_one) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+$
+
+
+# coverage
+
+# 1. there should be at least one test for one function or method
+# 2. write normal and edge cases to cover all inputs and outputs
+
+$ apt install python3-venv
+$ pip install coverage
+
+# create venv in project root directory
+# some packages should be installed in venv
+
+$ cd /path/to/project/root/directory
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+(.venv) $
+
+# omit the tests on test_*.py themselves
+
+(.venv) $ coverage run --omit="test_*.py"  -m unittest discover -v -s src/main -p "test_*.py"
+test_add_one (test_hello.TestHello.test_add_one) ... ok
+test_minus_one (test_hello.TestHello.test_minus_one) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+OK
+(.venv) $
+(.venv) $ coverage report
+Name                Stmts   Miss  Cover
+---------------------------------------
+src/main/hello.py       4      0   100%
+---------------------------------------
+TOTAL                   4      0   100%
+(.venv) $ deactivate
 
 
 ---
