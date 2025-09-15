@@ -635,6 +635,11 @@ assigning to an indexed position in the string results in an error.
     b[0]="A"  # ok, mutable
     a="".join(b)  # join list elements into new string: "Abc"
 
+    # or use the replace method and return a new string
+    s = "abc"
+    s = s.replace("b", "B")
+    print(s)
+
 indexing is used to obtain individual characters,
 slicing allows you to obtain a substring.
     word[2:5] # 'tho'
