@@ -37,20 +37,38 @@ to the shell.
 ---
 
 
-$ apt install python3.11
 $ apt install python3-pip
+$ apt install python3-full
+$ apt install python3.13
+$ apt install python3.13-venv
 
 # mirror
+
 $ vi ~/.pip/pip.conf
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 [install]
 trusted-host = https://pypi.tuna.tsinghua.edu.cn
 $
-$ python3 -m pip install --upgrade pip
+
 $ python3 -m pip config list
 $ pip3 config list
 $ pip config list
+
+# any pip install should run inside venv of a project
+# for better version dependency management
+
+$ cd /path/to/my_project
+$ python3 -m venv .venv
+
+$ source .venv/bin/activate
+(.venv) $
+(.venv) $ python3 -m pip install --upgrade pip
+(.venv) $
+(.venv) $ pip install coverage
+(.venv) $
+(.venv) $ deactivate
+$
 
 
 ---
@@ -1339,6 +1357,8 @@ for i in range(lower, upper):
 ---
 
 
+# unittest
+
 $ pwd
 /Users/ljh/Documents/helloPy
 $ ls
@@ -1394,19 +1414,19 @@ $
 # 1. there should be at least one test for one function or method
 # 2. write normal and edge cases to cover all inputs and outputs
 
-$ apt install python3-venv
-$ pip install coverage
-
 # create venv in project root directory
 # some packages should be installed in venv
 
-$ cd /path/to/project/root/directory
+$ apt install python3-venv
+
+$ cd /path/to/my_project
 $ python3 -m venv .venv
 $ source .venv/bin/activate
-(.venv) $
+(.venv) $ pip install coverage
 
 # omit the tests on test_*.py themselves
 
+(.venv) $
 (.venv) $ coverage run --omit="test_*.py"  -m unittest discover -v -s src/main -p "test_*.py"
 test_add_one (test_hello.TestHello.test_add_one) ... ok
 test_minus_one (test_hello.TestHello.test_minus_one) ... ok
@@ -1416,14 +1436,13 @@ Ran 2 tests in 0.002s
 
 OK
 (.venv) $
-(.venv) $ coverage report
-Name                Stmts   Miss  Cover
----------------------------------------
+(.venv) $ coverage report -m
+Name                Stmts   Miss  Cover   Missing
+-------------------------------------------------
 src/main/hello.py       4      0   100%
----------------------------------------
+-------------------------------------------------
 TOTAL                   4      0   100%
-(.venv) $ deactivate
-
+(.venv) $
 
 ---
 
