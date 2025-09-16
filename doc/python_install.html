@@ -1385,16 +1385,18 @@ if __name__ == "__main__":
     unittest.main()
 $
 
+# https://docs.python.org/3/library/unittest.html ,
+# python -m unittest is the equivalent of python -m unittest discover.
+# additional arguments like -s, -p can be passed with the discover.
+
 $ python3 -m unittest -v test_hello.py
 test_add_one (test_hello.TestHello) ... ok
 test_minus_one (test_hello.TestHello) ... ok
 
----------------------
 Ran 2 tests in 0.000s
 
 OK
 $
-
 
 # specify directory of the test_*.py files
 
@@ -1402,7 +1404,6 @@ $ python3 -m unittest discover -v -s src/main -p "test_*.py"
 test_add_one (test_hello.TestHello.test_add_one) ... ok
 test_minus_one (test_hello.TestHello.test_minus_one) ... ok
 
-----------------------------------------------------------------------
 Ran 2 tests in 0.001s
 
 OK
@@ -1427,24 +1428,21 @@ $ source .venv/bin/activate
 # omit the tests on test_*.py themselves
 
 (.venv) $
-(.venv) $ coverage run --omit="test_*.py"  -m unittest discover -v -s src/main -p "test_*.py"
+(.venv) $ coverage run --omit="test_*.py" -m unittest discover -v -s src/main -p "test_*.py"
 test_add_one (test_hello.TestHello.test_add_one) ... ok
 test_minus_one (test_hello.TestHello.test_minus_one) ... ok
 
-----------------------------------------------------------------------
 Ran 2 tests in 0.002s
 
 OK
 (.venv) $
 (.venv) $ coverage report -m
 Name                Stmts   Miss  Cover   Missing
--------------------------------------------------
 src/main/hello.py       4      0   100%
--------------------------------------------------
 TOTAL                   4      0   100%
 (.venv) $
 
-# or exlude the test_*.py files themselves in .coveragrc file
+# or omit the test_*.py files themselves in .coveragrc file
 # at project root directory
 
 $ cd /path/to/my_project
