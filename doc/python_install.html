@@ -1393,9 +1393,6 @@ $ python3 -m unittest -v test_hello.py
 test_add_one (test_hello.TestHello) ... ok
 test_minus_one (test_hello.TestHello) ... ok
 
-Ran 2 tests in 0.000s
-
-OK
 $
 
 # specify directory of the test_*.py files
@@ -1404,9 +1401,6 @@ $ python3 -m unittest discover -v -s src/main -p "test_*.py"
 test_add_one (test_hello.TestHello.test_add_one) ... ok
 test_minus_one (test_hello.TestHello.test_minus_one) ... ok
 
-Ran 2 tests in 0.001s
-
-OK
 $
 
 
@@ -1432,9 +1426,6 @@ $ source .venv/bin/activate
 test_add_one (test_hello.TestHello.test_add_one) ... ok
 test_minus_one (test_hello.TestHello.test_minus_one) ... ok
 
-Ran 2 tests in 0.002s
-
-OK
 (.venv) $
 (.venv) $ coverage report -m
 Name                Stmts   Miss  Cover   Missing
@@ -1449,10 +1440,13 @@ $ cd /path/to/my_project
 $ cat .coveragerc
 [run]
 omit =
-    test_*.py
-    */test_*.py
-    */tests/*
-    */test/*
+  test_*.py
+  */test_*.py
+  */tests/*
+  */test/*
+
+[report]
+  show_missing = true
 $
 
 
