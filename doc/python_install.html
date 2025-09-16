@@ -1444,6 +1444,20 @@ src/main/hello.py       4      0   100%
 TOTAL                   4      0   100%
 (.venv) $
 
+# or exlude the test_*.py files themselves in .coveragrc file
+# at project root directory
+
+$ cd /path/to/my_project
+$ cat .coveragerc
+[run]
+omit =
+    test_*.py
+    */test_*.py
+    */tests/*
+    */test/*
+$
+
+
 ---
 
 
