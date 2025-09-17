@@ -687,6 +687,41 @@ where the value is always an object reference, not the value of the object.
 ---
 
 
+4.8. Defining Functions
+
+function object can be assigned,
+
+f = fib
+f(100)
+
+
+---
+
+
+https://docs.python.org/3/library/collections.html#collections.namedtuple ,
+
+class can be assigned too,
+
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(11, y=22)
+p[0] + p[1]
+x, y = p
+
+
+---
+
+
+APPENDIX A: GLOSSARY
+
+class - A template for creating user-defined objects.
+object - the ultimate base class of any new-style class.
+type - every object has a type. the object's type is type.
+type alias - assigning the type to an identifier.
+
+
+---
+
+
 4.8.1 Default Argument Values
 
 def f(a, L=None):
