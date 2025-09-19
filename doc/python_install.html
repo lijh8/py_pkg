@@ -1879,22 +1879,27 @@ INFO(f"{b}") # ok
 
 # https://docs.python.org/3/reference/executionmodel.html ,
 
-# scopes: function, class, module
+x = 100
 
-# num = 100
-def fun1():
-    # num = 200
-    def fun2():
-        # global num #
-        # nonlocal num #
-        num = 300
-        INFO(f"{num}")
+def foo():
+    if True:
+        global x
+        x = 200
+    print(x)  # ok
 
-    fun2()
-    # INFO(f"{num}") #
+print(x)
 
-fun1()
-# INFO(f"{num}") #
+foo()
+print(x)
+
+# Variable Scope:
+# Function: Variables defined in a function are local to that function
+# Class: Variables defined in a class are accessible to all methods
+# Module: Variables defined at module level are global to that module
+
+# variables in if/for/while block are accessible after the block in the function
+# global binds variables which are accessible outside the function
+# nonlocal binds variables are accessible in outer function
 
 
 ---
