@@ -1059,6 +1059,140 @@ $
 ---
 
 
+https://docs.python.org/3/tutorial/classes.html ,
+
+9.3.1. Class Definition Syntax
+
+When a class definition is left normally (via the end), a class object is created.
+// 一个类也是一个对象, 使用 class 关键字定义的类，其本身也是对象。
+
+
+9.3.2. Class Objects
+when the class object was created.
+// class object 指的就是 class 关键字定义的类。
+
+Attribute references use the standard syntax used for all attribute references
+in Python: obj.name.
+then MyClass.i and MyClass.f are valid attribute references,
+returning an integer and a function object, respectively.
+
+class MyClass:
+    """A simple example class"""
+    i = 12345
+
+    def f(self):
+        return 'hello world'
+
+
+9.3.3. Instance Objects
+// 实例对象是指通过调用类构造的实例，实例或变量也是一个对象。
+// x = MyClass()
+// obj = MyClass()
+
+
+9.3.5. Class and Instance Variables
+
+"""
+# 类变量
+- 在类内部、构造函数或方法之外定义。
+- 在类内部最好通过类名引用；若通过 self 赋值（如 `self.x = ...`），会创建同名实例变量。
+- 在类外部可通过类名访问或修改（如 `ClassName.var`）。
+
+# 动态类属性
+- 在类外部可通过 `ClassName.attr = value` 动态添加类属性：
+  - 若 value 是数据 → 类变量；
+  - 若 value 是函数 → 方法。
+
+# 实例变量
+- 在类内部通过 self（方法的第一个参数）引用，首次赋值时创建。
+- 在类外部通过实例对象访问（如 `obj.attr`）。
+
+# 方法
+- 可在类定义中声明，也可在类外部动态添加。
+- 方法和类变量都属于类属性（class attributes）。
+"""
+
+class Dog:
+
+    # 类变量：在类内部，在构造函数或方法之外定义。
+    kind = 'canine'         # class variable shared by all instances
+
+    def __init__(self, name):
+
+        # 类变量：在类内部，最好通过类名引用。如果通过 self 引用并赋值会创建同名实例变量。
+        # Dog.kind = name
+
+        # 实例变量：在类内部，通过构造函数或方法第一个参数 self 引用。
+        self.name = name    # instance variable unique to each instance
+
+
+# Dog.kind = 'canine2'  # 类变量：在类外部，通过类名引用，首次赋值动态创建。（在类外部也能动态添加方法）
+
+d = Dog('Fido')
+e = Dog('Buddy')
+print(d.kind)  # 实例变量：在类外部，通过实例变量名引用。
+print(e.kind)
+print(d.name)
+print(e.name)
+
+def bark(self):
+    return f"{self.name}: Woof!"
+
+# 方法：在类外部，也可以动态添加方法。（类属性：包括类变量和方法）
+Dog.bark = bark
+f = Dog('husky')
+print(f.bark())  # husky: Woof!
+
+
+---
+
+
+9.4. Random Remarks
+
+Each value is an object, and therefore has a class (also called its type).
+It is stored as object.__class__.
+
+
+---
+
+
+python 语言中存在一个通用基类对象 object ,
+这个通用基类的类型是 type .
+
+class T:
+    pass
+    def foo():
+        pass
+
+t = T()
+
+print('1', T.__mro__)
+print('2', T.__bases__)
+print('3', T.__class__)
+print('4', t.__class__)
+print('5', type(T))
+print('6', type(t))
+print('7', type(object))
+print('8', type(int))
+print('9', type(str))
+
+
+# $ python3 main.py
+# 1 (<class '__main__.T'>, <class 'object'>)
+# 2 (<class 'object'>,)
+# 3 <class 'type'>
+# 4 <class '__main__.T'>
+# 5 <class 'type'>
+# 6 <class '__main__.T'>
+# 7 <class 'type'>
+# 8 <class 'type'>
+# 9 <class 'type'>
+# $
+
+
+---
+
+
 class Foo:
     name = "Foo"
 
